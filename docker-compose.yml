@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  db:
+    build: mysql
+    container_name: vgm_list_db
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "33067:3306"
+  redis:
+    image: redis:latest
+    ports:
+      - "63797:6379"
+    volumes:
+      - redisdata:/data
+  app:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/vgm_list_app
+    ports:
+      - "30007:3000"
+    depends_on:
+      - db
+      - redis
+volumes:
+  dbdata:
+  redisdata:
