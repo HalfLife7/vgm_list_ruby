@@ -30,6 +30,15 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 
+## Api related libs
+gem 'grape'
+gem 'grape-middleware-logger', '1.12'
+gem 'grape-entity'
+gem 'grape_on_rails_routes'
+gem 'grape-swagger'
+gem 'grape-swagger-entity'
+gem 'grape-swagger-rails'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -51,6 +60,9 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rubocop'
 end
 
 group :development do
@@ -65,8 +77,11 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
-  gem "webdrivers"
+  gem 'grape-entity-matchers'
+  gem 'rspec-its'
+  gem 'rspec-json_expectations'
+  gem 'rspec-percentage-formatter'
+  gem 'rspec-rails', '~> 6.0.0'
+  gem 'shoulda-callback-matchers'
+  gem 'shoulda-matchers'
 end
