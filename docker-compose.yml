@@ -23,6 +23,9 @@ services:
     depends_on:
       - db
       - redis
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
 volumes:
   dbdata:
   redisdata:
