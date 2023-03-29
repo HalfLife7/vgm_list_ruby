@@ -1,4 +1,5 @@
 require_relative "boot"
+require 'active_support/parameter_filter'
 
 require "rails/all"
 
