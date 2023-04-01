@@ -10,21 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_28_061713) do
-  create_table "album_arrangers", primary_key: ["artist_id", "album_id"], charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "artist_id", null: false
-    t.integer "album_id", null: false
-    t.datetime "created_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
-    t.datetime "updated_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
-    t.index ["album_id"], name: "album_id"
-  end
-
-  create_table "album_composers", primary_key: ["artist_id", "album_id"], charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "artist_id", null: false
-    t.integer "album_id", null: false
-    t.datetime "created_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
-    t.datetime "updated_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
-    t.index ["album_id"], name: "album_id"
+ActiveRecord::Schema[7.0].define(version: 2023_04_01_033720) do
+  create_table "album_artists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "album_id"
+    t.bigint "artist_id"
+    t.integer "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_album_artists_on_album_id"
+    t.index ["artist_id"], name: "index_album_artists_on_artist_id"
   end
 
   create_table "album_covers", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -47,22 +41,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_061713) do
     t.datetime "updated_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
     t.index ["album_id"], name: "album_id"
     t.index ["id", "album_id"], name: "id", unique: true
-  end
-
-  create_table "album_lyricists", primary_key: ["artist_id", "album_id"], charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "artist_id", null: false
-    t.integer "album_id", null: false
-    t.datetime "created_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
-    t.datetime "updated_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
-    t.index ["album_id"], name: "album_id"
-  end
-
-  create_table "album_performers", primary_key: ["artist_id", "album_id"], charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "artist_id", null: false
-    t.integer "album_id", null: false
-    t.datetime "created_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
-    t.datetime "updated_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
-    t.index ["album_id"], name: "album_id"
   end
 
   create_table "album_stores", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -250,16 +228,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_061713) do
     t.datetime "updated_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
   end
 
-  add_foreign_key "album_arrangers", "albums", name: "album_arrangers_ibfk_2", on_delete: :cascade
-  add_foreign_key "album_arrangers", "artists", name: "album_arrangers_ibfk_1", on_delete: :cascade
-  add_foreign_key "album_composers", "albums", name: "album_composers_ibfk_2", on_delete: :cascade
-  add_foreign_key "album_composers", "artists", name: "album_composers_ibfk_1", on_delete: :cascade
   add_foreign_key "album_covers", "albums", name: "album_covers_ibfk_1", on_delete: :cascade
   add_foreign_key "album_discs", "albums", name: "album_discs_ibfk_1", on_delete: :cascade
-  add_foreign_key "album_lyricists", "albums", name: "album_lyricists_ibfk_2", on_delete: :cascade
-  add_foreign_key "album_lyricists", "artists", name: "album_lyricists_ibfk_1", on_delete: :cascade
-  add_foreign_key "album_performers", "albums", name: "album_performers_ibfk_2", on_delete: :cascade
-  add_foreign_key "album_performers", "artists", name: "album_performers_ibfk_1", on_delete: :cascade
   add_foreign_key "album_stores", "albums", name: "album_stores_ibfk_1", on_delete: :cascade
   add_foreign_key "album_tracks", "albums", name: "album_tracks_ibfk_1", on_delete: :cascade
   add_foreign_key "game_albums", "albums", name: "game_albums_ibfk_1", on_delete: :cascade
