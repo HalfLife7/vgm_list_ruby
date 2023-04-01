@@ -12,6 +12,7 @@ module Vgm
         expose :publisher, documentation: { type: 'String' } # "Sumthing Else Music Works",
         expose :release_date, documentation: { type: 'Date' } # "2014-02-25",
         expose :updated_at, documentation: { type: 'String' } # 1600883160
+        expose :album_artists, using: Entities::AlbumArtist
       end
     end
   end
