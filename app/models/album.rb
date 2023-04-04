@@ -6,5 +6,4 @@ class Album < ApplicationRecord
   has_and_belongs_to_many :games,
                           join_table: 'game_albums'
   has_many :album_stores
-  has_many :album_tracks
 end
