@@ -33,14 +33,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_01_033720) do
   end
 
   create_table "album_discs", id: false, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "id"
+    t.integer "disc_number"
     t.integer "album_id", null: false
     t.text "length"
     t.text "name"
     t.datetime "created_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
     t.datetime "updated_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
     t.index ["album_id"], name: "album_id"
-    t.index ["id", "album_id"], name: "id", unique: true
+    t.index ["disc_number", "album_id"], name: "id", unique: true
   end
 
   create_table "album_stores", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -53,15 +53,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_01_033720) do
   end
 
   create_table "album_tracks", id: false, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "id"
+    t.integer "track_number", null: false
     t.integer "album_id", null: false
-    t.integer "disc_id", null: false
+    t.integer "disc_number", null: false
     t.text "length"
     t.text "name"
     t.datetime "created_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
     t.datetime "updated_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
     t.index ["album_id"], name: "album_id"
-    t.index ["id", "album_id", "disc_id"], name: "id", unique: true
+    t.index ["track_number", "album_id", "disc_number"], name: "id", unique: true
   end
 
   create_table "albums", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
