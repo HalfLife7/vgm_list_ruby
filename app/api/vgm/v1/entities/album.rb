@@ -13,6 +13,8 @@ module Vgm
         expose :release_date, documentation: { type: 'Date' } # "2014-02-25",
         expose :updated_at, documentation: { type: 'String' } # 1600883160
         expose :album_artists, using: Entities::AlbumArtist
+        expose :album_covers, using: Entities::AlbumCover
+        expose :album_discs, using: Entities::AlbumDisc
       end
     end
   end
