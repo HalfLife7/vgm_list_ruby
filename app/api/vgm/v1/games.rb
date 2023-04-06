@@ -26,12 +26,32 @@ module Vgm
           error!(e)
         end
 
+        # GET /api/v1/games/random
+        desc 'Returns a random game'
+        get :random do
+          status 200
+          game = Game.order("RAND()").first
+          present game, with: Entities::Game
+        rescue ActiveRecord::RecordNotFound
+          error!('Record not found', 404)
+        end
+
         # GET /api/v1/games/:id
         desc 'Returns specific game'
         route_param :id, type: Integer do
           get do
             status 200
-            Game.find(params[:id])
+            game = Game.includes(
+              :game_alternative_names,
+              :game_artworks,
+              :collections,
+              :game_covers,
+              :platforms,
+              :game_screenshots,
+              :game_videos,
+              :game_websites,
+              :albums).find(params[:id])
+            present game, with: Entities::Game
           rescue ActiveRecord::RecordNotFound
             error!('Record not found', 404)
           end
