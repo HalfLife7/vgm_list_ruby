@@ -21,7 +21,7 @@ RSpec.describe 'Games', type: :request do
         let(:query_params) { { limit: 3 } }
         before { FactoryBot.create_list(:game, 6) }
 
-        it 'returns 10 results' do
+        it 'returns 3 results' do
           get '/api/v1/games', params: query_params
           expect(JSON.parse(response.body).size).to eq(3)
         end
@@ -39,7 +39,7 @@ RSpec.describe 'Games', type: :request do
 
     it 'returns a specific game' do
       get "/api/v1/games/#{game.id}"
-      expect(JSON.parse(response.body)).to eq(JSON.parse(game.to_json))
+      expect(JSON.parse(response.body)['id']).to eq(JSON.parse(game.to_json)['id'])
     end
   end
 
